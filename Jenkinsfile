@@ -12,7 +12,7 @@ pipeline {
          }
          stage('Setup'){
              steps{
-                 sh 'python3 -m venv ~/.devops'
+                 sh 'PY -m venv ~/.devops'
                  sh '''
                     pip install --upgrade pip &&\
 		                    pip install -r requirements.txt

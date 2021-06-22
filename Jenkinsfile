@@ -26,10 +26,10 @@ pipeline {
                 '''
              }
          }
-        stage('test') {
+         stage('test') {
             println('A test has failed!')
             sh 'exit 1'
-        }
+         }
         } catch(e) {
             // mark build as failed
             currentBuild.result = "FAILURE";

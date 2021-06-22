@@ -28,19 +28,30 @@ node {
         '''
         
     }
-    def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} "
+
+    currentBuild.result = "SUCCESS";
+    def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
     def content = '${JELLY_SCRIPT,template="html"}'
 
-
-        
-  } catch(e) {
-    // mark build as success
-    currentBuild.result = "SUCCESS";
-    // set variables
-        // send email
+    // send email
+    
       emailext(body: content, mimeType: 'text/html',
          replyTo: '$DEFAULT_REPLYTO', subject: subject,
          to: '$DEFAULT_RECIPIENTS', attachLog: true )
+        
+  } catch(e) {
+    // mark build as failed
+    currentBuild.result = "FAILURE";
+    // set variables
+    def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
+    def content = '${JELLY_SCRIPT,template="html"}'
+
+    // send email
+    
+      emailext(body: content, mimeType: 'text/html',
+         replyTo: '$DEFAULT_REPLYTO', subject: subject,
+         to: '$DEFAULT_RECIPIENTS', attachLog: true )
+        
 
     // mark current build as a failure and throw the error
     throw e;

@@ -27,6 +27,7 @@ node {
                     pip install -r requirements.txt
         '''
         }
+    }    
   } catch(e) {
     // mark build as failed
     //currentBuild.result = "FAILURE";

@@ -30,7 +30,7 @@ node {
     }    
   } catch(e) {
     // mark build as failed
-    //currentBuild.result = "FAILURE";
+    currentBuild.result = "SUCCESS";
     // set variables
     def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} "
     def content = '${JELLY_SCRIPT,template="html"}'

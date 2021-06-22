@@ -36,13 +36,5 @@ node {
          replyTo: '$DEFAULT_REPLYTO', subject: subject,
          to: '$DEFAULT_RECIPIENTS', attachLog: true )
         
-  } catch(e) {
-    // mark build as failed
-    currentBuild.result = "SUCCESS";
-    // set variables
-    
-
-    // mark current build as a failure and throw the error
-    throw e;
-  }
+  } 
 }

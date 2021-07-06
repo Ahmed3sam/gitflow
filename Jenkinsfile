@@ -1,11 +1,5 @@
 pipeline {
      agent any
-            // config 
-        def to = emailextrecipients([
-                [$class: 'CulpritsRecipientProvider'],
-                [$class: 'DevelopersRecipientProvider'],
-                [$class: 'RequesterRecipientProvider']
-        ])
      stages {
          stage('Build') {
              steps {
@@ -32,6 +26,12 @@ pipeline {
             }
             steps {
               script{
+                            // config 
+                def to = emailextrecipients([
+                        [$class: 'CulpritsRecipientProvider'],
+                        [$class: 'DevelopersRecipientProvider'],
+                        [$class: 'RequesterRecipientProvider']
+                ])
                 if(currentBuild.result == "SUCCESS"){
 
                   def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"

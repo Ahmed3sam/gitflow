@@ -26,15 +26,9 @@ pipeline {
             }
             steps {
               script{
-                            // config 
-                def to = emailextrecipients([
-                        [$class: 'CulpritsRecipientProvider'],
-                        [$class: 'DevelopersRecipientProvider'],
-                        [$class: 'RequesterRecipientProvider']
-                ])
-                if(currentBuild.result == "SUCCESS"){
 
-                  def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
+
+                  def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
 					        def content = '${JELLY_SCRIPT,template="html"}'
 					        // send email
 					        emailext(body: content, mimeType: 'text/html',
